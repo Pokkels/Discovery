@@ -12,4 +12,19 @@
 
     <artifactId>AccountSystemTranslator</artifactId>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>za.ac.nwu.AccountSystem</groupId>
+            <artifactId>AccountSystemDomain</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>za.ac.nwu.AccountSystem</groupId>
+            <artifactId>AccountSystemRepository</artifactId>
+            <version>${project.version}</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 </project>
