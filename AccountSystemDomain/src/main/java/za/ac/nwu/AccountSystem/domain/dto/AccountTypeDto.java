@@ -98,6 +98,8 @@ public class AccountTypeDto implements Serializable {
         return new AccountType(getMnemonic(),getAccountTypeName(), getCreationDate());
     }
 
+
+
     @Override
     public int hashCode() {
         return Objects.hash(mnemonic, accountTypeName, creationDate);

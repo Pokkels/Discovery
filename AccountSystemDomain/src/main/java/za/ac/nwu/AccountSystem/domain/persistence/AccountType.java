@@ -33,6 +33,8 @@ public class AccountType implements Serializable {
         this.creationDate = creationDate;
     }
 
+    public AccountType() {
+    }
 
     @Id
     @SequenceGenerator(name = "ACCOUNT_TYPE_SEQ1", sequenceName = "HEINO.ACCOUNT_TYPE_SEQ1", allocationSize = 1)

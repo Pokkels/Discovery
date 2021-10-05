@@ -41,4 +41,22 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
 
     }
 
+    @Override
+    public AccountTypeDto getAccountTypeByMnemonic(String mnemonic){
+
+        AccountType accountType = accountTypeRepository.getAccountTypeMnemonicNativeQuery(mnemonic);
+        return new AccountTypeDto(accountType);
+    }
+    @Override
+    public AccountTypeDto getAccountTypeByMnemonicNativeQuery(String mnemonic){
+
+        AccountType accountType = accountTypeRepository.getAccountTypeMnemonicNativeQuery(mnemonic);
+        return new AccountTypeDto(accountType);
+    }
+    @Override
+    public AccountTypeDto getAccountTypeDtoByMnemonic(String mnemonic){
+
+        return accountTypeRepository.getAccountTypeDtoByMnemonic(mnemonic);
+    }
+
 }
