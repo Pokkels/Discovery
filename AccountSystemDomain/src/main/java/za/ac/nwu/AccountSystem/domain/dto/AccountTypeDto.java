@@ -17,9 +17,11 @@ import java.util.Set;
 
 public class AccountTypeDto implements Serializable {
 
+    private static final long serialVersionUID = 7537385697258830591L;
     private String mnemonic;
     private String accountTypeName;
     private LocalDate creationDate;
+    private Long miles;
 
 
 
@@ -27,16 +29,18 @@ public class AccountTypeDto implements Serializable {
 
     }
 
-    public AccountTypeDto(String mnemonic, String accountTypeName, LocalDate creationDate) {
+    public AccountTypeDto(String mnemonic, String accountTypeName, LocalDate creationDate, Long miles) {
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
         this.creationDate = creationDate;
+        this.miles = miles;
     }
 
     public AccountTypeDto(AccountType accountType) {
         this.setMnemonic(accountType.getMnemonic());
         this.setAccountTypeName(accountType.getAccountTypeName());
         this.setCreationDate(accountType.getCreationDate());
+        this.setMiles(accountType.getMiles());
     }
 
     public void setAccountTypeName(String accountTypeName) {
@@ -69,6 +73,8 @@ public class AccountTypeDto implements Serializable {
         return accountTypeName;
     }
 
+
+
     @ApiModelProperty(position = 3,
             value = "AccountType Creation Date",
             name = "CreationDate",
@@ -85,17 +91,33 @@ public class AccountTypeDto implements Serializable {
         this.creationDate = creationDate;
     }
 
+    @ApiModelProperty(position = 4,
+            value = "AccountType Total Miles",
+            name = "TotalMiles",
+            notes = "The amount of miles the account holder has",
+            dataType = "Long",
+            example = "500",
+            allowEmptyValue = false,
+            required = true)
+    public Long getMiles() {
+        return miles;
+    }
+
+    public void setMiles(Long miles) {
+        this.miles = miles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccountType that = (AccountType) o;
-        return Objects.equals(mnemonic, that.getMnemonic()) && Objects.equals(accountTypeName, that.getAccountTypeName()) && Objects.equals(creationDate, that.getCreationDate());
+        AccountTypeDto that = (AccountTypeDto) o;
+        return Objects.equals(mnemonic, that.getMnemonic()) && Objects.equals(accountTypeName, that.getAccountTypeName()) && Objects.equals(creationDate, that.getCreationDate()) && Objects.equals(miles, that.getMiles());
     }
 
     @JsonIgnore
     public AccountType getAccountType(){
-        return new AccountType(getMnemonic(),getAccountTypeName(), getCreationDate());
+        return new AccountType(getMnemonic(),getAccountTypeName(), getCreationDate(), getMiles());
     }
 
 

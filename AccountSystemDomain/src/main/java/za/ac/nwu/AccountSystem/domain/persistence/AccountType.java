@@ -17,20 +17,23 @@ public class AccountType implements Serializable {
     private String mnemonic;
     private String accountTypeName;
     private LocalDate creationDate;
+    private Long miles;
 
     private Set<AccountTransaction> accountTransactions;
 
-    public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate creationDate) {
+    public AccountType(Long accountTypeId, String mnemonic, String accountTypeName, LocalDate creationDate,Long miles) {
         this.accountTypeId = accountTypeId;
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
         this.creationDate = creationDate;
+        this.miles = miles;
     }
 
-    public AccountType(String mnemonic, String accountTypeName, LocalDate creationDate) {
+    public AccountType(String mnemonic, String accountTypeName, LocalDate creationDate,Long miles) {
         this.mnemonic = mnemonic;
         this.accountTypeName = accountTypeName;
         this.creationDate = creationDate;
+        this.miles = miles;
     }
 
     public AccountType() {
@@ -76,7 +79,7 @@ public class AccountType implements Serializable {
         this.creationDate = creationDate;
     }
 
-    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(targetEntity = AccountTransaction.class, fetch = FetchType.LAZY, mappedBy = "accountType")
     public Set<AccountTransaction> getAccountTransactions() {
         return accountTransactions;
     }
@@ -85,17 +88,26 @@ public class AccountType implements Serializable {
         this.accountTransactions = accountTransactions;
     }
 
+    @Column(name = "MILES_SUM")
+    public Long getMiles() {
+        return miles;
+    }
+
+    public void setMiles(Long miles) {
+        this.miles = miles;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountType that = (AccountType) o;
-        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName)  && Objects.equals(creationDate, that.creationDate);
+        return Objects.equals(accountTypeId, that.accountTypeId) && Objects.equals(mnemonic, that.mnemonic) && Objects.equals(accountTypeName, that.accountTypeName)  && Objects.equals(creationDate, that.creationDate) && Objects.equals(miles, that.miles);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(accountTypeId, mnemonic, accountTypeName, creationDate);
+        return Objects.hash(accountTypeId, mnemonic, accountTypeName, creationDate, miles);
     }
 
     @Override
@@ -104,7 +116,8 @@ public class AccountType implements Serializable {
                 "accountTypeId=" + accountTypeId +
                 ", mnemonic='" + mnemonic + '\'' +
                 ", accountTypeName='" + accountTypeName + '\'' +
-                ", creationDate=" + creationDate +
+                ", creationDate=" + creationDate + '\'' +
+                ", miles=" + miles +
                 '}';
     }
 

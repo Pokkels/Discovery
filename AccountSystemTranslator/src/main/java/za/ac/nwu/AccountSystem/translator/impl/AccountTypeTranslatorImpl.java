@@ -7,9 +7,11 @@ import za.ac.nwu.AccountSystem.domain.persistence.AccountType;
 import za.ac.nwu.AccountSystem.repo.persistence.AccountTypeRepository;
 import za.ac.nwu.AccountSystem.translator.AccountTypeTranslator;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
+@Transactional
 @Component
 public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
 
@@ -55,7 +57,7 @@ public class AccountTypeTranslatorImpl implements AccountTypeTranslator {
     }
     @Override
     public AccountTypeDto getAccountTypeDtoByMnemonic(String mnemonic){
-
+        System.out.println("HREREREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
         return accountTypeRepository.getAccountTypeDtoByMnemonic(mnemonic);
     }
 

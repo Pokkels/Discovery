@@ -14,9 +14,11 @@ public interface AccountTypeRepository extends JpaRepository<AccountType, Long> 
             "       ACCOUNT_TYPE_ID,    " +
             "       ACCOUNT_TYPE_NAME,  " +
             "       CREATION_DATE,      " +
-            "       MNEMONIC            " +
+            "       MNEMONIC,           " +
+            "       MILES_SUM,              " +
+
             "   FROM                    " +
-            "       HEINO.ACCOUNT_TYPE  "+
+            "       HEINO1.ACCOUNT_TYPE  "+
             "   WHERE MNEMONIC = :mnemonic ", nativeQuery = true)
     AccountType getAccountTypeMnemonicNativeQuery(String mnemonic);
 
@@ -30,7 +32,8 @@ public interface AccountTypeRepository extends JpaRepository<AccountType, Long> 
     @Query(value = "SELECT new za.ac.nwu.AccountSystem.domain.dto.AccountTypeDto(" +
             "         at.mnemonic,           " +
             "         at.accountTypeName,    " +
-            "         at.creationDate)" +
+            "         at.creationDate,       " +
+            "         at.miles)              " +
             "   FROM                           " +
             "         AccountType at            "  +
             "   WHERE at.mnemonic = :mnemonic   ")

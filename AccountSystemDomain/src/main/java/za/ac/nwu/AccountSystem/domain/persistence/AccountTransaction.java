@@ -14,16 +14,14 @@ public class AccountTransaction implements Serializable {
     private Long transactionId;
     private AccountType accountType;
     private Long memberId;
-    private Long earned;
-    private Long spend;
+    private Long amount;
     private LocalDate transactionDate;
 
-    public AccountTransaction(Long transactionId, AccountType accountType, Long memberId, Long earned, Long spend, LocalDate transactionDate) {
+    public AccountTransaction(Long transactionId, AccountType accountType, Long memberId, Long amount, LocalDate transactionDate) {
         this.transactionId = transactionId;
         this.accountType = accountType;
         this.memberId = memberId;
-        this.earned = earned;
-        this.spend = spend;
+        this.amount = amount;
         this.transactionDate = transactionDate;
     }
 
@@ -57,22 +55,12 @@ public class AccountTransaction implements Serializable {
         this.memberId = memberId;
     }
 
-    @Column(name = "MILES_EARNED")
-    public Long getEarned() {
-        return earned;
+    public Long getAmount() {
+        return amount;
     }
 
-    public void setEarned(Long earned) {
-        this.earned = earned;
-    }
-
-    @Column(name = "MILES_SPEND")
-    public Long getSpend() {
-        return spend;
-    }
-
-    public void setSpend(Long spend) {
-        this.spend = spend;
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     @Column(name = "TRANSACTION_DATE")
@@ -89,12 +77,12 @@ public class AccountTransaction implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransaction that = (AccountTransaction) o;
-        return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountType, that.accountType) && Objects.equals(memberId, that.memberId) && Objects.equals(earned, that.earned) && Objects.equals(spend, that.spend) && Objects.equals(transactionDate, that.transactionDate);
+        return Objects.equals(transactionId, that.transactionId) && Objects.equals(accountType, that.accountType) && Objects.equals(memberId, that.memberId) && Objects.equals(amount, that.amount) && Objects.equals(transactionDate, that.transactionDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, accountType, memberId, earned, spend, transactionDate);
+        return Objects.hash(transactionId, accountType, memberId, amount, transactionDate);
     }
 
     @Override
@@ -103,8 +91,7 @@ public class AccountTransaction implements Serializable {
                 "transactionId=" + transactionId +
                 ", accountType=" + accountType +
                 ", memberId=" + memberId +
-                ", earned=" + earned +
-                ", spend=" + spend +
+                ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
                 '}';
     }

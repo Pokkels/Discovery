@@ -4,35 +4,57 @@ import za.ac.nwu.AccountSystem.domain.persistence.AccountTransaction;
 import za.ac.nwu.AccountSystem.domain.persistence.AccountType;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class AccountTransactionDto {
+public class AccountTransactionDto implements Serializable {
 
 
+    private static final long serialVersionUID = -3656296961313947165L;
     private Long transactionId;
-    private AccountType accountType;
+    private String accountTypeMnemonic;
     private Long memberId;
-    private Long earned;
-    private Long spend;
+    private Long amount;
     private LocalDate transactionDate;
 
-    public AccountTransactionDto(Long transactionId, AccountType accountType, Long memberId, Long earned, Long spend, LocalDate transactionDate) {
-        this.accountType = accountType;
+    public AccountTransactionDto() {
+    }
+
+    public AccountTransactionDto(Long transactionId, String accountTypeMnemonic , Long memberId, Long amount, LocalDate transactionDate) {
+        this.transactionId = transactionId;
+        this.accountTypeMnemonic = accountTypeMnemonic;
         this.memberId = memberId;
-        this.earned = earned;
-        this.spend = spend;
+        this.amount = amount;
         this.transactionDate = transactionDate;
     }
 
-
-
-    public AccountType getAccountType() {
-        return accountType;
+    public AccountTransactionDto(AccountTransaction accountTransaction){
+        this.transactionId = accountTransaction.getTransactionId();
+        this.accountTypeMnemonic = accountTransaction.getAccountType().getMnemonic();
+        this.memberId = accountTransaction.getMemberId();
+        this.amount = accountTransaction.getAmount();
+        this.transactionDate = accountTransaction.getTransactionDate();
     }
 
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
+    public AccountTransaction buildAccountTransaction(AccountType accountType){
+        return new AccountTransaction(this.getTransactionId(),accountType,this.getMemberId(),this.getAmount(),this.getTransactionDate());
+    }
+
+    public Long getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(Long transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public String getAccountTypeMnemonic() {
+        return accountTypeMnemonic;
+    }
+
+    public void setAccountTypeMnemonic(String accountTypeMnemonic) {
+        this.accountTypeMnemonic = accountTypeMnemonic;
     }
 
     public Long getMemberId() {
@@ -43,20 +65,12 @@ public class AccountTransactionDto {
         this.memberId = memberId;
     }
 
-    public Long getEarned() {
-        return earned;
+    public Long getAmount() {
+        return amount;
     }
 
-    public void setEarned(Long earned) {
-        this.earned = earned;
-    }
-
-    public Long getSpend() {
-        return spend;
-    }
-
-    public void setSpend(Long spend) {
-        this.spend = spend;
+    public void setAmount(Long amount) {
+        this.amount = amount;
     }
 
     public LocalDate getTransactionDate() {
@@ -71,22 +85,22 @@ public class AccountTransactionDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AccountTransaction that = (AccountTransaction) o;
-        return Objects.equals(accountType, that.getAccountType()) && Objects.equals(memberId, that.getMemberId()) && Objects.equals(earned, that.getEarned()) && Objects.equals(spend, that.getSpend()) && Objects.equals(transactionDate, that.getTransactionDate());
+        AccountTransactionDto that = (AccountTransactionDto) o;
+        return  Objects.equals(transactionId, that.getTransactionId()) && Objects.equals(accountTypeMnemonic, that.getAccountTypeMnemonic()) && Objects.equals(memberId, that.getMemberId()) && Objects.equals(amount, that.getAmount()) && Objects.equals(transactionDate, that.getTransactionDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(transactionId, accountType, memberId, earned, spend, transactionDate);
+        return Objects.hash(transactionId, accountTypeMnemonic, memberId, amount, transactionDate);
     }
 
     @Override
     public String toString() {
         return "AccountTransaction{" +
-                ", accountType=" + accountType +
+                ", transactionId=" + transactionId +
+                ", accountTypeMnemonic=" + accountTypeMnemonic +
                 ", memberId=" + memberId +
-                ", earned=" + earned +
-                ", spend=" + spend +
+                ", amount=" + amount +
                 ", transactionDate=" + transactionDate +
                 '}';
     }
