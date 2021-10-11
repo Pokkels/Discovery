@@ -4,8 +4,8 @@ import za.ac.nwu.AccountSystem.domain.dto.AccountTransactionDto;
 
 import java.util.List;
 
-public interface FetchAccountTransactionFlow {
+public interface FetchAccountTransactionFlow
+{
     List<AccountTransactionDto> getAllAccountTransactions();
-
     AccountTransactionDto getAccountTransactionById(Long transactionId);
 }

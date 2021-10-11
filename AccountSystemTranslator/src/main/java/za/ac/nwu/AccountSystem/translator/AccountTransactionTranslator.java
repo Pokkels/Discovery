@@ -4,11 +4,9 @@ import za.ac.nwu.AccountSystem.domain.persistence.AccountTransaction;
 
 import java.util.List;
 
-public interface AccountTransactionTranslator {
-
+public interface AccountTransactionTranslator
+{
     AccountTransaction save(AccountTransaction accountTransaction);
-
     List<AccountTransaction> getAllAccountTransactions();
-
     AccountTransaction getAccountTransactionByPk(Long transactionId);
 }

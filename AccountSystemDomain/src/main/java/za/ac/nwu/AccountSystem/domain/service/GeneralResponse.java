@@ -3,25 +3,30 @@ package za.ac.nwu.AccountSystem.domain.service;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class GeneralResponse<T> implements Serializable {
+public class GeneralResponse<T> implements Serializable
+{
     private final boolean succesfull;
     private final transient T payload;
 
-    public GeneralResponse(boolean succesfull, T payload){
+    public GeneralResponse(boolean succesfull, T payload)
+    {
         this.succesfull = succesfull;
         this.payload = payload;
     }
 
-    public boolean isSuccesfull(){
+    public boolean isSuccesfull()
+    {
         return succesfull;
     }
 
-    public T getPayload(){
+    public T getPayload()
+    {
         return payload;
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GeneralResponse<?> that = (GeneralResponse<?>) o;
@@ -29,10 +34,12 @@ public class GeneralResponse<T> implements Serializable {
     }
 
     @Override
-    public int hashCode() {return Objects.hash(succesfull, payload);}
+    public int hashCode()
+    {return Objects.hash(succesfull, payload);}
 
     @Override
-    public String toString(){
+    public String toString()
+    {
         return "GeneralResponse{" + "succesfull=" + succesfull + ", payload=" + payload + '}';
     }
 

@@ -7,8 +7,9 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
-@Table(name = "ACCOUNT_TRANSACTION", schema = "HEINO")
-public class AccountTransaction implements Serializable {
+@Table(name = "ACCOUNT_TRANSACTION", schema = "HEINO1")
+public class AccountTransaction implements Serializable
+{
 
     private static final long serialVersionUID = -3625635643738390993L;
     private Long transactionId;
@@ -17,7 +18,8 @@ public class AccountTransaction implements Serializable {
     private Long amount;
     private LocalDate transactionDate;
 
-    public AccountTransaction(Long transactionId, AccountType accountType, Long memberId, Long amount, LocalDate transactionDate) {
+    public AccountTransaction(Long transactionId, AccountType accountType, Long memberId, Long amount, LocalDate transactionDate)
+    {
         this.transactionId = transactionId;
         this.accountType = accountType;
         this.memberId = memberId;
@@ -25,55 +27,68 @@ public class AccountTransaction implements Serializable {
         this.transactionDate = transactionDate;
     }
 
-    @Id
-    @SequenceGenerator(name = "ACCOUNT_TRANSACTION_SEQ", sequenceName = "ACCOUNTSYSTEM.ACCOUNT_TRANSACTION_SEQ", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACCOUNT_TRANSACTION_SEQ")
-    @Column(name = "ACCOUNT_TRANS_ID")
-    public Long getTransactionId() {
-        return transactionId;
+    public AccountTransaction()
+    {
     }
 
-    public void setTransactionId(Long transactionId) {
+    @Id
+    @SequenceGenerator(name = "ACCOUNT_TRANSACTION_SEQ", sequenceName = "HEINO1.ACCOUNT_TRANSACTION_SEQ", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ACCOUNT_TRANSACTION_SEQ")
+
+    @Column(name = "ACCOUNT_TRANS_ID")
+    public Long getTransactionId()
+    {
+        return transactionId;
+    }
+    public void setTransactionId(Long transactionId)
+    {
         this.transactionId = transactionId;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ACCOUNT_TYPE_ID")
+
     public AccountType getAccountType() {
         return accountType;
     }
-
-    public void setAccountType(AccountType accountType) {
+    public void setAccountType(AccountType accountType)
+    {
         this.accountType = accountType;
     }
+
     @Column(name = "MEMBER_ID")
-    public Long getMemberId() {
+    public Long getMemberId()
+    {
         return memberId;
     }
-
-    public void setMemberId(Long memberId) {
+    public void setMemberId(Long memberId)
+    {
         this.memberId = memberId;
     }
 
-    public Long getAmount() {
+    @Column(name = "AMOUNT")
+    public Long getAmount()
+    {
         return amount;
     }
-
-    public void setAmount(Long amount) {
+    public void setAmount(Long amount)
+    {
         this.amount = amount;
     }
 
     @Column(name = "TRANSACTION_DATE")
-    public LocalDate getTransactionDate() {
+    public LocalDate getTransactionDate()
+    {
         return transactionDate;
     }
-
-    public void setTransactionDate(LocalDate transactionDate) {
+    public void setTransactionDate(LocalDate transactionDate)
+    {
         this.transactionDate = transactionDate;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AccountTransaction that = (AccountTransaction) o;
@@ -81,12 +96,14 @@ public class AccountTransaction implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return Objects.hash(transactionId, accountType, memberId, amount, transactionDate);
     }
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "AccountTransaction{" +
                 "transactionId=" + transactionId +
                 ", accountType=" + accountType +
